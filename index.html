@@ -1,0 +1,128 @@
+<html lang="en">
+    <title>Home</title>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <a class="navbar-brand" href="#">
+                 <img src="image0.png" alt="Logo" style="width:60px;">
+                </a>
+                <!-- Links -->
+                <ul class="nav">
+                    <li class="nav-item">
+                    <a class="nav-link text-light"  href="Complain.html">Complains</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-light" href="missing-person.html">Missing Person</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-light" href="crime-report.html">Crime Report</a>
+                    </li>
+                </ul>
+                <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link text-light" id="sign" href="sign-up.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-light" id="log" href="log-in.html">Log in</a>
+                    </li>
+                </ul> 
+            </nav>          
+            <br/>
+            <div class="row">
+                <div class="col-md-6">
+                <img src="image01.jpg" width="100%" height="500"></div>
+                <div class="col-md-6">
+                <img src="image02.jpg" width="100%" height="500"></div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col"><h4>Complain</h4>
+                <p>Complains is reported in the above Complains Link .complains  
+                     Attributes of complains is title , city , area and discription.</p>
+                    <img src="images03.jpg" width="100%" height="200"/>
+                </div>
+                <div class="col"><h4>Crime Report</h4>
+                <p>Crime Report is reported in the above Crime Report Link.
+                    The Attributes of crime report is title,city,area and discription.</p>
+                    <img src="images04.jpg" width="100%" height="200"/></div>
+                <div class="col"><h4>Missing Person</h4>
+                <p>Missing Person is reported in the above Missing Person Link.
+                    The Attributes of missing person is title,city,area and discription.</p>
+                    <img src="images05.jpg" width="100%" height="200"/></div><br/><br/> 
+                    
+            </div><br/><br/> 
+              
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+            
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyCsnc1Sgj3AC4or6VrU3zIK8rqL54O7gtY",
+                authDomain: "uit-19-55114.firebaseapp.com",
+                databaseURL: "https://uit-19-55114.firebaseio.com",
+                projectId: "uit-19-55114",
+                storageBucket: "uit-19-55114.appspot.com",
+                messagingSenderId: "924476307104",
+                appId: "1:924476307104:web:a7b04ecab07f9f683bbbc5",
+                measurementId: "G-K7WMFKKB2X"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+
+            var user = firebase.auth().currentUser;
+            
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById("sign").innerHTML=""
+                document.getElementById("log").innerHTML="Log Out"
+                var flag = false
+                var log = document.getElementById('log');
+                log.addEventListener('click', (e) => {
+                e.preventDefault();
+                firebase.auth().signOut().then(function() {
+                    console.log("log out ho gya")
+                    document.getElementById("sign").innerHTML="Sign in"
+                    document.getElementById("log").innerHTML="Log-in"
+                    flag = true
+                    }).catch(function() {
+                        console.log("log out nahe hua")
+                    // An error happened.
+                });
+            });
+            } else {
+                //alert("First to sign up")
+            }
+            });
+
+        </script>    
+    </body>
+</html>

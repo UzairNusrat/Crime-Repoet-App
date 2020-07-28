@@ -1,0 +1,153 @@
+<html lang="en">
+    <title>Detail for Missing Person</title>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+            li{
+                font-weight: bold;
+                list-style: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <a class="navbar-brand" href="index.html">
+                 <img src="image0.png" alt="Logo" style="width:60px;">
+                </a>
+                <!-- Links -->
+                <ul class="nav">
+                    <li class="nav-item">
+                    <a class="nav-link text-light"  href="Complain.html">Complains</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-light" href="missing-person.html">Missing Person</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-light" href="crime-report.html">Crime Report</a>
+                    </li>
+                </ul>
+            </nav>
+            <br/>
+            <ul id="detail">
+                <li>Title : </li>
+                <li>First Name : </li>
+                <li>Last Name : </li>
+                <li>City : </li>
+                <li>Area : </li>
+                <li>Phone Number : </li>
+                <li>Detail : </li>
+            </ul>
+            <hr/>
+        </div> 
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
+            
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+        
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyCsnc1Sgj3AC4or6VrU3zIK8rqL54O7gtY",
+                authDomain: "uit-19-55114.firebaseapp.com",
+                databaseURL: "https://uit-19-55114.firebaseio.com",
+                projectId: "uit-19-55114",
+                storageBucket: "uit-19-55114.appspot.com",
+                messagingSenderId: "924476307104",
+                appId: "1:924476307104:web:a7b04ecab07f9f683bbbc5",
+                measurementId: "G-K7WMFKKB2X"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();            
+
+            var db = firebase.firestore()
+            db.settings
+
+            var g
+
+            var detail = document.getElementById('detail')
+
+            /*var title = document.getElementById('title')
+            var city = document.getElementById('city')
+            var area = document.getElementById('area')
+            var det = document.getElementById('det')
+            var pno = document.getElementById('phno')
+            var fname = document.getElementById('fname')
+            var lname = document.getElementById('lname')
+            */
+            function renderCrime(doc){
+
+                var tispa = document.createElement('span')
+                var citspa = document.createElement('span')
+                var arespa = document.createElement('span')
+                var detspa = document.createElement('span')
+                var pnospa = document.createElement('span')
+                var fnspa = document.createElement('span')
+                var lnspa = document.createElement('span')
+
+                detail.appendChild(tispa);
+                tispa.appendChild(fnspa);
+                fnspa.appendChild(lnspa);
+                lnspa.appendChild(citspa);
+                citspa.appendChild(arespa);
+                arespa.appendChild(pnospa);
+                pnospa.appendChild(detspa);
+            
+                tispa.setAttribute('data-id', doc.id);
+                tispa.textContent = doc.data().Title;
+                citspa.setAttribute('data-id', doc.id);
+                citspa.textContent = doc.data().City;
+                arespa.setAttribute('data-id', doc.id);
+                arespa.textContent = doc.data().Area;
+                detspa.setAttribute('data-id', doc.id);
+                detspa.textContent = doc.data().Detail;
+                pnospa.setAttribute('data-id', doc.id);
+                pnospa.textContent = doc.data().P_Number;
+                fnspa.setAttribute('data-id', doc.id);
+                fnspa.textContent = doc.data().First_Name;
+                lnspa.setAttribute('data-id', doc.id);
+                lnspa.textContent = doc.data().Last_Name;
+            }
+
+            //Get Data
+            db.collection('missing person').get().then(snapshot => {
+                    snapshot.docs.forEach(doc => {
+                        var id = doc.id
+                        //console.log(doc.data().First_Name)
+                        for(var i=1;i<2;i++){
+                            renderCrime(doc)
+                        }                            
+                    });
+                })
+            var user = firebase.auth().currentUser;
+
+                
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log("Move to Missing Person add page") 
+            }   
+            else {
+                location.replace("index.html")
+                alert("First to sign up")
+            }
+            });
+        </script>
+    </body>
+</html>

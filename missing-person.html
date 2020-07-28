@@ -1,0 +1,120 @@
+<html lang="en">
+    <title>Missing Person</title>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <a class="navbar-brand" href="index.html">
+                 <img src="image0.png" alt="Logo" style="width:60px;">
+                </a>
+                <!-- Links -->
+                <ul class="nav">
+                    <li class="nav-item">
+                    <a class="nav-link text-light" href="complain.html">Complains</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-light" href="crime-report.html">Crime Report</a>
+                    </li>
+                </ul>
+            </nav>
+            <br/>
+            <h1 style="text-align:center;">Missing Person</h1><br/><br/>
+            <table class="table table-hover" id="set">
+                <tr>
+                    <th>TITLE</th>
+                    <th>AREA</th>
+                    <th>CITY</th>
+                    <th>Status</th>
+                    <th>Detail</th>
+                </tr>
+            </table><br/>
+            <button type="button" onclick="location.replace('add-missingperson.html')" class="btn btn-secondary">Add Missing Person</button>
+        </div>        
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
+            
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyCsnc1Sgj3AC4or6VrU3zIK8rqL54O7gtY",
+                authDomain: "uit-19-55114.firebaseapp.com",
+                databaseURL: "https://uit-19-55114.firebaseio.com",
+                projectId: "uit-19-55114",
+                storageBucket: "uit-19-55114.appspot.com",
+                messagingSenderId: "924476307104",
+                appId: "1:924476307104:web:a7b04ecab07f9f683bbbc5",
+                measurementId: "G-K7WMFKKB2X"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+
+            var db = firebase.firestore()
+            db.settings
+        
+            var imp = document.getElementById('set');
+            function renderCrime(doc){
+                var tr = document.createElement('tr')
+                var td1 = document.createElement('td')
+                var td2 = document.createElement('td')
+                var td3 = document.createElement('td')
+                var td4 = document.createElement('td')
+                var td5 = document.createElement('td')
+                var span1 = document.createElement('span')
+                var span2 = document.createElement('span')
+                var span3 = document.createElement('span')
+                var span4 = document.createElement('span')
+                var ancor = document.createElement('a')
+                ancor.setAttribute('href','misperdetail.html')
+                ancor.innerHTML="detail"
+
+                td1.setAttribute('data-id', doc.id);
+                span1.textContent = doc.data().Title;
+                td2.setAttribute('data-id', doc.id);
+                span2.textContent = doc.data().Area;
+                td3.setAttribute('data-id', doc.id);
+                span3.textContent = doc.data().City;
+                td4.setAttribute('data-id', doc.id);
+                span4.textContent = doc.data().status;
+                
+                imp.appendChild(tr);
+                td1.appendChild(span1);
+                tr.appendChild(td1);
+                td2.appendChild(span2);
+                tr.appendChild(td2);
+                td3.appendChild(span3);
+                tr.appendChild(td3);
+                tr.appendChild(td4)
+                td4.appendChild(span4)
+                tr.appendChild(td5)
+                td5.appendChild(ancor)
+            }
+
+            //Get Data
+            db.collection('missing person').get().then(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    renderCrime(doc)        
+                });
+            })
+        </script>
+    </body>
+</html>

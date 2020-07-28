@@ -1,0 +1,147 @@
+<html lang="en">
+    <title>Create Missing Person Report</title>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+          <a class="navbar-brand" href="index.html">
+           <img src="image0.png" alt="Logo" style="width:60px;">
+          </a>
+          <!-- Links -->
+          <ul class="nav">
+              <li class="nav-item">
+              <a class="nav-link text-light"  href="Complain.html">Complains</a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link text-light" href="missing-person.html">Missing Person</a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link text-light" href="crime-report.html">Crime Report</a>
+              </li>
+          </ul>
+      </nav><br/><h1 style="text-align: center;">Add Missing Person</h1><br/>
+        <form id="info">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="fname">First Name : </label>
+              <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="lname">Last Name</label>
+              <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
+            </div> 
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="city">City</label>
+              <input type="text" class="form-control" name="city" id="city" placeholder="City" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="area">Area</label>
+              <input type="text" class="form-control" name="area" id="area" placeholder="Area" >
+            </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" name="address" id="Address" placeholder="Address" >
+              </div>
+              <div class="form-group col-md-4">
+                <label for="pno">Phone Number</label>
+                <input type="number" class="form-control" name="pno" id="pno" placeholder="Phone Number" >
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="det">Detail</label>
+              <textarea type="text" class="form-control" name="det" id="det" cols="8" rows="10"></textarea>
+            </div> 
+          </div>
+          <button type="submit" id="submit" onclick="sub()" class="btn btn-primary">Submit</button>
+        </form>
+      </div>       
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
+    
+    <script>
+    // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCsnc1Sgj3AC4or6VrU3zIK8rqL54O7gtY",
+            authDomain: "uit-19-55114.firebaseapp.com",
+            databaseURL: "https://uit-19-55114.firebaseio.com",
+            projectId: "uit-19-55114",
+            storageBucket: "uit-19-55114.appspot.com",
+            messagingSenderId: "924476307104",
+            appId: "1:924476307104:web:a7b04ecab07f9f683bbbc5",
+            measurementId: "G-K7WMFKKB2X"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        var db = firebase.firestore()
+        db.settings
+        
+        var form = document.getElementById('info')         
+
+        //Store Data
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            db.collection('missing person').add({
+                First_Name : form.fname.value,
+                Last_Name : form.lname.value,
+                Title : form.title.value,
+                Area : form.area.value,
+                City : form.city.value,
+                Address : form.address.value,
+                P_Number : form.pno.value,
+                Detail : form.det.value,
+            })
+        })
+
+        function sub(){
+          //Get Data
+          db.collection('missing person').get().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                             
+                                  
+              });
+          })
+        }
+
+        var user = firebase.auth().currentUser;
+            
+        firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            console.log("Move to Missing Person add page")
+        } else {
+            location.replace("index.html")
+            alert("First to sign up")
+        }
+        }); 
+      </script> 
+  </body>
+</html>
